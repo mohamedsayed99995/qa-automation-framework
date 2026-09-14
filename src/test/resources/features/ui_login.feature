@@ -34,3 +34,14 @@ Feature: SauceDemo login
     And the URL should be "https://www.saucedemo.com/checkout-step-two.html"
     When I finish the order
     Then I should see the order confirmation messages
+
+
+
+  @ui @validLogin
+    Scenario:Sort the products with Price (low to high)
+    Given I am on the SauceDemo login page
+    When I login with username "standard_user" and password "secret_sauce"
+    Then I should be navigated to the Products page
+    When I sort products by price from low to high
+    Then the products should be displayed from lowest to highest price
+

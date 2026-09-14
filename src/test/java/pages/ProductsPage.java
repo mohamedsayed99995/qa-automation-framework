@@ -4,6 +4,7 @@ import framework.driver.DriverFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 
 import java.util.Comparator;
 import java.util.List;
@@ -16,6 +17,8 @@ public class ProductsPage {
     private final By itemName = By.cssSelector(".inventory_item_name");
     private final By itemPrice = By.cssSelector(".inventory_item_price");
     private final By addButton = By.cssSelector("button");
+    private final By sortDropdown = By.cssSelector("[data-test='product-sort-container']");
+
 
     public ProductsPage() {
         this.driver = DriverFactory.getDriver();
@@ -34,6 +37,12 @@ public class ProductsPage {
                 ))
                 .toList();
     }
+
+    public void sortProductsLowToHigh() {
+        Select sort = new Select(driver.findElement(sortDropdown));
+        sort.selectByVisibleText("Price (low to high)");
+    }
+
 
     public List<Product> getTwoMostExpensiveProducts() {
         return getProducts().stream()
